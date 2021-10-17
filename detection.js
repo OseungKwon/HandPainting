@@ -21,7 +21,7 @@ function gotHands(results) {
   //console.log(detections);
   //console.log(detections.multiHandLandmarks);
   if (detections.multiHandLandmarks.length > 0) {
-    // love
+    // love 손 모양
 
     if (
       detections.multiHandLandmarks[0][12].y >
