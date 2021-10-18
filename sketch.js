@@ -60,13 +60,14 @@ let sketch = function (p) {
         // let z = detections.multiHandLandmarks[i][j].z;
         p.stroke(hue, 40, 255);
         p.point(x, y);
+        if (j === 4 && i === 0) p.rect(x, y, 50, 50);
       }
     }
   };
 
   p.drawLines = function (index) {
     p.stroke(0, 0, 255);
-    p.strokeWeight(3);
+    p.strokeWeight(5);
     for (let i = 0; i < detections.multiHandLandmarks.length; i++) {
       for (let j = 0; j < index.length - 1; j++) {
         let x = detections.multiHandLandmarks[i][index[j]].x * p.width;
