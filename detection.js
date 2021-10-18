@@ -143,20 +143,29 @@ function flipVideo() {
 //------- Condortable p5 world :))))) -------//
 
 let canvas1;
-
+let img;
 let sketch1 = function (p) {
   console.log(p);
   setup = function () {
     canvas1 = createCanvas(640, 480);
     canvas1.id("canvas1");
+    img = loadImage("f01.png");
 
     colorMode(HSB);
   };
 
   p.draw = function () {
     clear();
-    background(200);
+    //background(200);
     text(word, 20, 20, 100, 100);
+    //  trigger
+    if (word === "이 한마디") {
+      // put designed particle module
+      let posX = 100;
+      let posY = 100;
+      image(img, posX, posY, 200, 200);
+      translate(0, 0, 40);
+    }
   };
 };
 

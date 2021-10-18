@@ -10,7 +10,7 @@ body {
 }
 #canvas1 {
   position: absolute;
-  top: 0;
+  top: 10rem;
   left: 10px;
   z-index: 10;
 }
