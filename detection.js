@@ -3,7 +3,7 @@ let detections = {};
 const videoElement = document.getElementById("video");
 const button = document
   .querySelector(".button")
-  .addEventListener("click", hello);
+  .addEventListener("click", flipVideo);
 const hands = new Hands({
   locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
@@ -134,6 +134,6 @@ const camera = new Camera(videoElement, {
 });
 camera.start();
 
-function hello() {
+function flipVideo() {
   videoElement.classList.toggle("flipped");
 }
