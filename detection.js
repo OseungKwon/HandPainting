@@ -1,5 +1,5 @@
 let detections = {};
-
+let word = "";
 const videoElement = document.getElementById("video");
 const button = document
   .querySelector(".button")
@@ -51,6 +51,7 @@ function gotHands(results) {
     ) {
       console.log("이 한마디");
       document.getElementById("content").innerHTML = "이 한마디";
+      word = "이 한마디";
     }
     if (
       // 주먹 쥔 모양(오른손만)
@@ -83,6 +84,7 @@ function gotHands(results) {
     ) {
       console.log("사랑해요");
       document.getElementById("content").innerHTML = "사랑해요";
+      particle("love");
     } else {
       //console.log("no");
     }
@@ -137,3 +139,25 @@ camera.start();
 function flipVideo() {
   videoElement.classList.toggle("flipped");
 }
+
+//------- Condortable p5 world :))))) -------//
+
+let canvas1;
+
+let sketch1 = function (p) {
+  console.log(p);
+  setup = function () {
+    canvas1 = createCanvas(640, 480);
+    canvas1.id("canvas1");
+
+    colorMode(HSB);
+  };
+
+  p.draw = function () {
+    clear();
+    background(200);
+    text(word, 20, 20, 100, 100);
+  };
+};
+
+let myp51 = new p5(sketch1);
