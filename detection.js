@@ -7,20 +7,20 @@ const button = document
 const hands = new Hands({
   locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-  }
+  },
 });
 
 hands.setOptions({
   maxNumHands: 4,
   minDetectionConfidence: 0.8,
-  minTrackingConfidence: 0.5
+  minTrackingConfidence: 0.5,
 });
 
 hands.onResults(gotHands);
 function gotHands(results) {
   detections = results;
-  //console.log(detections);
-  console.log(detections.multiHandLandmarks.length);
+  console.log(detections);
+  //console.log(detections.multiHandLandmarks.length);
   if (detections.multiHandLandmarks.length === 1) {
     if (
       // z축과 동일(오른손만)
@@ -132,7 +132,7 @@ const camera = new Camera(videoElement, {
     await hands.send({ image: videoElement });
   },
   width: 640,
-  height: 480
+  height: 480,
 });
 camera.start();
 
