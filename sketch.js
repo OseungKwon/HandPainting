@@ -61,7 +61,7 @@ let sketch = function (p) {
         p.stroke(hue, 40, 255);
         p.point(x, y);
         // find left hand
-        //if (j === 4 && i === 0) p.rect(x, y, 50, 50);
+        if (j === 4 && i === 0) p.rect(x, y, 50, 50);
       }
     }
   };
