@@ -13,13 +13,13 @@ const button = document
 const hands = new Hands({
   locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.3.1632795355/${file}`;
-  },
+  }
 });
 
 hands.setOptions({
   maxNumHands: 4,
   minDetectionConfidence: 0.8,
-  minTrackingConfidence: 0.5,
+  minTrackingConfidence: 0.5
 });
 
 hands.onResults(gotHands);
@@ -193,7 +193,7 @@ const camera = new Camera(videoElement, {
     await hands.send({ image: videoElement });
   },
   width: 640,
-  height: 480,
+  height: 480
 });
 camera.start();
 
@@ -206,6 +206,7 @@ let capture;
 let img = [];
 let images = [];
 let start = 0;
+let canvas1;
 function preload() {
   for (let i = 0; i < 8; i++) {
     img[i] = loadImage("img/" + i + ".png");
@@ -213,7 +214,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(640, 480);
+  canvas1 = createCanvas(640, 480);
+  canvas1.id("canvas1");
   capture = createCapture(VIDEO);
   capture.hide();
   for (let i = 0; i < img.length; i++) {
@@ -231,8 +233,9 @@ function setup() {
 
 function draw() {
   imageMode(CORNER);
-  background(0); //카메라 사용할 경우 주석처리
-
+  tint(100); // 영상 틴트
+  image(capture, 0, 0, width, (width * capture.height) / capture.width);
+  noTint(); // 이미지에는 틴트 안 씌워진다
   if (count > img.length + 1) {
     count = 0;
   }

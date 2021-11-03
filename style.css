@@ -10,9 +10,9 @@ body {
 }
 #canvas1 {
   position: absolute;
-  top: 20rem;
+  top: 10rem;
   left: 10px;
-  z-index: 10;
+  z-index: 1;
 }
 
 #video {
@@ -20,8 +20,6 @@ body {
   top: 10rem;
   left: 10px;
   z-index: -1;
-  border: 3px #fff solid;
-  border-radius: 10px;
 }
 
 .flipped {
