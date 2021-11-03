@@ -1,4 +1,10 @@
 let detections = {};
+let count = 0;
+/*count=> 
+1: 사랑해요, 2: 이 한마디, 3: 참, 4: 좋은, 5: 말,
+
+
+*/
 let word = "";
 const videoElement = document.getElementById("video");
 const button = document
@@ -31,6 +37,10 @@ function gotHands(results) {
     ) {
       console.log("참");
       document.getElementById("content").innerHTML = "참";
+      if (count === 2) {
+        count++;
+        console.log(count);
+      }
     }
     if (
       //검지만 펴져있는 손 모양(오른손만)
@@ -42,6 +52,10 @@ function gotHands(results) {
       console.log("이 한마디");
       document.getElementById("content").innerHTML = "이 한마디";
       word = "이 한마디";
+      if (count === 1) {
+        count++;
+        console.log(count);
+      }
     }
     if (
       hand[0][5].x > hand[0][8].x &&
@@ -89,6 +103,10 @@ function gotHands(results) {
     ) {
       console.log("사랑해요");
       document.getElementById("content").innerHTML = "사랑해요";
+      if (count === 0) {
+        count++;
+        console.log(count);
+      }
       //particle("love");
     } else {
       //console.log("no");
@@ -184,32 +202,142 @@ function flipVideo() {
 }
 
 //------- Condortable p5 world :))))) -------//
+let capture;
+let img = [];
+let images = [];
 
-let canvas1;
-let img;
-let sketch1 = function (p) {
-  console.log(p);
-  setup = function () {
-    canvas1 = createCanvas(640, 480);
-    canvas1.id("canvas1");
-    img = loadImage("f01.png");
+function preload() {
+  for (let i = 0; i < 8; i++) {
+    img[i] = loadImage("img/" + i + ".png");
+  }
+}
 
-    colorMode(HSB);
-  };
+function setup() {
+  createCanvas(640, 480);
+  capture = createCapture(VIDEO);
+  capture.hide();
+  for (let i = 0; i < img.length; i++) {
+    images[i] = new Img(
+      i,
+      random(50, width - 50),
+      random(50, height - 50),
+      random(-1, 1),
+      random(-0.1, 0.1),
+      random(-1, 1),
+      random(-1, 1)
+    );
+  }
+}
 
-  p.draw = function () {
-    clear();
-    //background(200);
-    text(word, 20, 20, 100, 100);
-    //  trigger
-    if (word === "이 한마디") {
-      // put designed particle module
-      let posX = 100;
-      let posY = 100;
-      image(img, posX, posY, 200, 200);
-      translate(0, 0, 40);
+function draw() {
+  imageMode(CORNER);
+  background(0); //카메라 사용할 경우 주석처리
+
+  if (count > img.length + 1) {
+    count = 0;
+  }
+
+  if (count == 1) {
+    for (let i = 0; i < 1; i++) {
+      images[i].draw();
+      images[i].rotate();
+      images[i].move();
     }
-  };
-};
+  } else if (count == 2) {
+    for (let i = 0; i < 2; i++) {
+      images[i].draw();
+      images[i].rotate();
+      images[i].move();
+    }
+  } else if (count == 3) {
+    for (let i = 2; i < 3; i++) {
+      images[i].draw();
+      images[i].rotate();
+      images[i].move();
+    }
+  } else if (count == 4) {
+    for (let i = 3; i < 4; i++) {
+      images[i].draw();
+      images[i].rotate();
+      images[i].move();
+    }
+  } else if (count == 5) {
+    for (let i = 3; i < 5; i++) {
+      images[i].draw();
+      images[i].rotate();
+      images[i].move();
+    }
+  } else if (count == 6) {
+    for (let i = 3; i < 6; i++) {
+      images[i].draw();
+      images[i].rotate();
+      images[i].move();
+    }
+  } else if (count == 7) {
+    for (let i = 3; i < 7; i++) {
+      images[i].draw();
+      images[i].rotate();
+      images[i].move();
+    }
+  } else if (count == 8) {
+    for (let i = 3; i < 8; i++) {
+      images[i].draw();
+      images[i].rotate();
+      images[i].move();
+    }
+  } else if (count == 9) {
+    for (let i = 0; i < img.length; i++) {
+      images[i].draw();
+      images[i].rotate();
+      images[i].move();
+    }
+  }
+  console.log(count);
+}
 
-let myp51 = new p5(sketch1);
+function mousePressed() {
+  count++;
+}
+
+class Img {
+  constructor(i, x, y, angle, inc, xSpeed, ySpeed) {
+    this.i = i;
+    this.x = x;
+    this.y = y;
+    this.angle = angle;
+    this.inc = inc;
+    this.xSpeed = xSpeed;
+    this.ySpeed = ySpeed;
+  }
+
+  draw() {
+    imageMode(CENTER);
+    push();
+    fill(255);
+    translate(this.x, this.y);
+    rotate(this.angle);
+    image(img[this.i], 0, 0, img[this.i].width, img[this.i].height);
+    pop();
+  }
+
+  move() {
+    this.x += this.xSpeed;
+    this.y += this.ySpeed;
+
+    if (
+      this.x > width - img[this.i].width / 2 ||
+      this.x < img[this.i].width / 2
+    ) {
+      this.xSpeed = this.xSpeed * -1;
+    }
+    if (
+      this.y > height - img[this.i].height / 2 ||
+      this.y < img[this.i].height / 2
+    ) {
+      this.ySpeed = this.ySpeed * -1;
+    }
+  }
+  rotate() {
+    this.angle += this.inc;
+  }
+}
