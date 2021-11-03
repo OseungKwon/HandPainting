@@ -205,7 +205,7 @@ function flipVideo() {
 let capture;
 let img = [];
 let images = [];
-
+let start = 0;
 function preload() {
   for (let i = 0; i < 8; i++) {
     img[i] = loadImage("img/" + i + ".png");
@@ -236,57 +236,19 @@ function draw() {
   if (count > img.length + 1) {
     count = 0;
   }
-
-  if (count == 1) {
-    for (let i = 0; i < 1; i++) {
+  if (count < 9) {
+    for (let i = start; i < count; i++) {
       images[i].draw();
       images[i].rotate();
       images[i].move();
+      if (i === 2) start = 2;
+      if (i === 3) start = 3;
+      if (i === 7) start = 7;
+      if (i === 8) start = 8;
     }
-  } else if (count == 2) {
-    for (let i = 0; i < 2; i++) {
-      images[i].draw();
-      images[i].rotate();
-      images[i].move();
-    }
-  } else if (count == 3) {
-    for (let i = 2; i < 3; i++) {
-      images[i].draw();
-      images[i].rotate();
-      images[i].move();
-    }
-  } else if (count == 4) {
-    for (let i = 3; i < 4; i++) {
-      images[i].draw();
-      images[i].rotate();
-      images[i].move();
-    }
-  } else if (count == 5) {
-    for (let i = 3; i < 5; i++) {
-      images[i].draw();
-      images[i].rotate();
-      images[i].move();
-    }
-  } else if (count == 6) {
-    for (let i = 3; i < 6; i++) {
-      images[i].draw();
-      images[i].rotate();
-      images[i].move();
-    }
-  } else if (count == 7) {
-    for (let i = 3; i < 7; i++) {
-      images[i].draw();
-      images[i].rotate();
-      images[i].move();
-    }
-  } else if (count == 8) {
-    for (let i = 3; i < 8; i++) {
-      images[i].draw();
-      images[i].rotate();
-      images[i].move();
-    }
-  } else if (count == 9) {
-    for (let i = 0; i < img.length; i++) {
+  }
+  if (count === 9) {
+    for (let i = 0; i < 8; i++) {
       images[i].draw();
       images[i].rotate();
       images[i].move();
