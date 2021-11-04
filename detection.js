@@ -13,13 +13,13 @@ const button = document
 const hands = new Hands({
   locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.3.1632795355/${file}`;
-  }
+  },
 });
 
 hands.setOptions({
   maxNumHands: 4,
   minDetectionConfidence: 0.8,
-  minTrackingConfidence: 0.5
+  minTrackingConfidence: 0.5,
 });
 
 hands.onResults(gotHands);
@@ -193,7 +193,7 @@ const camera = new Camera(videoElement, {
     await hands.send({ image: videoElement });
   },
   width: 640,
-  height: 480
+  height: 480,
 });
 camera.start();
 
@@ -238,6 +238,7 @@ function draw() {
   noTint(); // 이미지에는 틴트 안 씌워진다
   if (count > img.length + 1) {
     count = 0;
+    start = 0;
   }
   if (count < 9) {
     for (let i = start; i < count; i++) {
