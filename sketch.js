@@ -61,13 +61,13 @@ let sketch = function (p) {
         p.stroke(hue, 40, 255);
         p.point(x, y);
         // find left hand
-        if (j === 4 && i === 0) p.rect(x, y, 50, 50);
+        //if (j === 4 && i === 0) p.rect(x, y, 50, 50);
       }
     }
   };
 
   p.drawLines = function (index) {
-    p.stroke(0, 0, 0);
+    p.stroke(0, 0, 50);
     p.strokeWeight(5);
     for (let i = 0; i < detections.multiHandLandmarks.length; i++) {
       for (let j = 0; j < index.length - 1; j++) {
