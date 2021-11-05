@@ -237,6 +237,7 @@ function draw() {
   image(capture, 0, 0, width, (width * capture.height) / capture.width);
   noTint(); // 이미지에는 틴트 안 씌워진다
   if (count > img.length + 1) {
+    start = 0;
     count = 0;
     start = 0;
   }
@@ -258,7 +259,7 @@ function draw() {
       images[i].move();
     }
   }
-  console.log(count);
+  console.log(count, img.length);
 }
 
 function mousePressed() {
