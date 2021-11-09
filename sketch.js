@@ -1,10 +1,8 @@
-//------- Condortable p5 world :))))) -------//
-
 let canvas;
 
 let sketch = function (p) {
   p.setup = function () {
-    canvas = p.createCanvas(640, 480);
+    canvas = p.createCanvas(1920, 1080);
     canvas.id("canvas");
 
     p.colorMode(p.HSB);
@@ -52,13 +50,13 @@ let sketch = function (p) {
 
   p.drawLandmarks = function (indexArray, hue) {
     p.noFill();
-    p.strokeWeight(8);
+    p.strokeWeight(9);
     for (let i = 0; i < detections.multiHandLandmarks.length; i++) {
       for (let j = indexArray[0]; j < indexArray[1]; j++) {
         let x = detections.multiHandLandmarks[i][j].x * p.width;
         let y = detections.multiHandLandmarks[i][j].y * p.height;
         // let z = detections.multiHandLandmarks[i][j].z;
-        p.stroke(hue, 40, 255);
+        p.stroke(hue, 0, 255);
         p.point(x, y);
         // find left hand
         //if (j === 4 && i === 0) p.rect(x, y, 50, 50);
@@ -67,7 +65,7 @@ let sketch = function (p) {
   };
 
   p.drawLines = function (index) {
-    p.stroke(0, 0, 50);
+    p.stroke(0, 0, 80);
     p.strokeWeight(5);
     for (let i = 0; i < detections.multiHandLandmarks.length; i++) {
       for (let j = 0; j < index.length - 1; j++) {

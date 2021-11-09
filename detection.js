@@ -5,11 +5,8 @@ let count = 0;
 
 
 */
-let word = "";
 const videoElement = document.getElementById("video");
-const button = document
-  .querySelector(".button")
-  .addEventListener("click", flipVideo);
+const button = document.querySelector(".button");
 const hands = new Hands({
   locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.3.1632795355/${file}`;
@@ -17,7 +14,7 @@ const hands = new Hands({
 });
 
 hands.setOptions({
-  maxNumHands: 4,
+  maxNumHands: 2,
   minDetectionConfidence: 0.8,
   minTrackingConfidence: 0.5,
 });
@@ -35,11 +32,11 @@ function gotHands(results) {
       Math.abs(hand[0][4].z - hand[0][8].z) < 0.1 &&
       hand[0][16].y < hand[0][13].y
     ) {
-      console.log("참");
-      document.getElementById("content").innerHTML = "참";
-      if (count === 2) {
+      if (count === 2 || count === 13) {
         count++;
         console.log(count);
+        console.log("참");
+        document.getElementById("content").innerHTML = "참";
       }
     }
     if (
@@ -49,12 +46,38 @@ function gotHands(results) {
       hand[0][20].y > hand[0][17].y &&
       hand[0][8].y < hand[0][5].y
     ) {
-      console.log("이 한마디");
-      document.getElementById("content").innerHTML = "이 한마디";
-      word = "이 한마디";
-      if (count === 1) {
+      if (count === 1 || count === 12) {
         count++;
         console.log(count);
+        document.getElementById("content").innerHTML = "이 한마디";
+        console.log("이 한마디");
+      }
+      if (count === 1 || count === 16) {
+        count++;
+        console.log(count);
+        document.getElementById("content").innerHTML = "엄마";
+        console.log("엄마");
+      }
+    }
+    if (hand[0][0].x > hand[0][12].x && hand[0][4].y < hand[0][20].y) {
+      if (count === 19) {
+        count++;
+        console.log(count);
+        document.getElementById("content").innerHTML = "갈";
+        console.log("갈");
+      }
+    }
+    if (
+      hand[0][20].y > hand[0][4].y &&
+      hand[0][6].x < hand[0][8].x &&
+      hand[0][10].x < hand[0][12].x &&
+      hand[0][14].x < hand[0][16].x
+    ) {
+      if (count === 17) {
+        count++;
+        console.log(count);
+        document.getElementById("content").innerHTML = "아빠";
+        console.log("아빠");
       }
     }
     if (
@@ -63,23 +86,28 @@ function gotHands(results) {
       hand[0][13].x > hand[0][16].x &&
       hand[0][1].x > hand[0][4].x
     ) {
-      document.getElementById("content").innerHTML = "우리";
+      if (count === 5) {
+        count++;
+        console.log(count);
+        console.log("우리");
+        document.getElementById("content").innerHTML = "우리";
+      }
     }
 
-    // if (
-    //   // 주먹 쥔 모양(오른손만)
-    //   hand[0][12].y >
-    //     hand[0][9].y &&
-    //   hand[0][16].y >
-    //     hand[0][13].y &&
-    //   hand[0][20].y >
-    //     hand[0][17].y &&
-    //   hand[0][8].y >
-    //     hand[0][5].y
-    // ) {
-    //   console.log("좋은");
-    //   document.getElementById("content").innerHTML = "좋은";
-    // }
+    if (
+      // 주먹 쥔 모양(오른손만)
+      hand[0][12].y < hand[0][9].y &&
+      hand[0][16].y < hand[0][13].y &&
+      hand[0][20].y < hand[0][17].y &&
+      hand[0][8].y < hand[0][5].y
+    ) {
+      if (count === 3 || count === 14) {
+        count++;
+        console.log(count);
+        console.log("좋은");
+        document.getElementById("content").innerHTML = "좋은";
+      }
+    }
   }
   if (hand.length === 2) {
     if (
@@ -88,8 +116,24 @@ function gotHands(results) {
       hand[0][5].y > hand[0][8].y &&
       hand[0][13].y > hand[0][16].y
     ) {
-      console.log("식구");
-      document.getElementById("content").innerHTML = "식구";
+      if (count === 6) {
+        count++;
+        console.log(count);
+        console.log("식구");
+        document.getElementById("content").innerHTML = "식구";
+      }
+    }
+    if (
+      hand[0][0].x > hand[0][12].x &&
+      hand[1][0].x < hand[1][12].x &&
+      hand[0][0].y < hand[0][8].y
+    ) {
+      if (count === 18) {
+        count++;
+        console.log(count);
+        console.log("일터");
+        document.getElementById("content").innerHTML = "일터";
+      }
     }
     if (
       Math.abs(
@@ -101,15 +145,12 @@ function gotHands(results) {
       hand[1][14].x > hand[1][16].x &&
       hand[1][18].x > hand[1][20].x
     ) {
-      console.log("사랑해요");
-      document.getElementById("content").innerHTML = "사랑해요";
-      if (count === 0) {
+      if (count === 0 || count === 11) {
         count++;
         console.log(count);
+        console.log("사랑해요");
+        document.getElementById("content").innerHTML = "사랑해요";
       }
-      //particle("love");
-    } else {
-      //console.log("no");
     }
     if (
       //검지만 펴져있는 손 모양(오른손)
@@ -127,8 +168,12 @@ function gotHands(results) {
         hand[1][20].y > hand[1][17].y &&
         hand[1][4].x > hand[1][3].x
       ) {
-        console.log("말");
-        document.getElementById("content").innerHTML = "말";
+        if (count === 4 || count === 10 || count === 15 || count === 22) {
+          count++;
+          console.log(count);
+          console.log("말");
+          document.getElementById("content").innerHTML = "말";
+        }
       }
     }
     if (
@@ -137,8 +182,12 @@ function gotHands(results) {
       hand[1][8].x > hand[1][0].x &&
       hand[1][16].x > hand[1][13].x
     ) {
-      console.log("자고");
-      document.getElementById("content").innerHTML = "자고";
+      if (count === 7) {
+        count++;
+        console.log(count);
+        console.log("자고");
+        document.getElementById("content").innerHTML = "자고";
+      }
     }
     if (
       //검지만 펴져있는 손 모양(오른손)
@@ -156,8 +205,12 @@ function gotHands(results) {
         hand[1][20].y > hand[1][17].y &&
         hand[1][4].x < hand[1][3].x
       ) {
-        console.log("나면");
-        document.getElementById("content").innerHTML = "나면";
+        if (count === 8) {
+          count++;
+          console.log(count);
+          console.log("나면");
+          document.getElementById("content").innerHTML = "나면";
+        }
       }
     }
     if (
@@ -168,32 +221,30 @@ function gotHands(results) {
       hand[0][5].y > hand[0][8].y &&
       hand[0][13].y > hand[0][16].y
     ) {
-      console.log("주고받는");
-      document.getElementById("content").innerHTML = "주고받는";
+      if (count === 9 || count === 21) {
+        count++;
+        console.log(count);
+        console.log("주고받는");
+        document.getElementById("content").innerHTML = "주고받는";
+      }
+    }
+    if (hand[1][0].z > hand[1][12].z && hand[0][0].y < hand[0][12].y) {
+      if (count === 20) {
+        count++;
+        console.log(count);
+        console.log("때");
+        document.getElementById("content").innerHTML = "때";
+      }
     }
   }
-  // if (hand.length === 1) {
-  //   // love 손 모양
-
-  //   if (
-  //     hand[0][12].y >
-  //       hand[0][9].y &&
-  //     hand[0][16].y >
-  //       hand[0][13].y
-  //   ) {
-  //     console.log("love");
-  //   } else {
-  //     console.log("hi");
-  //   }
-  // }
 }
 
 const camera = new Camera(videoElement, {
   onFrame: async () => {
     await hands.send({ image: videoElement });
   },
-  width: 640,
-  height: 480,
+  width: 1920,
+  height: 1080,
 });
 camera.start();
 
@@ -206,29 +257,52 @@ let capture;
 let img = [];
 let images = [];
 let start = 0;
-let canvas1;
+
+let song;
+let fft;
+let noiseMax = 2;
+let phase = 0;
+let offset = 0;
+let sg = [];
+
 function preload() {
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 23; i++) {
     img[i] = loadImage("img/" + i + ".png");
+  }
+  song = loadSound("song.mp3");
+}
+
+function toggleSong() {
+  if (song.isPlaying()) {
+    song.pause();
+  } else {
+    song.play();
   }
 }
 
 function setup() {
-  canvas1 = createCanvas(640, 480);
-  canvas1.id("canvas1");
+  createCanvas(1920, 1080);
   capture = createCapture(VIDEO);
   capture.hide();
   for (let i = 0; i < img.length; i++) {
     images[i] = new Img(
       i,
-      random(50, width - 50),
-      random(50, height - 50),
+      random(-width / 2, width / 2),
+      random(-height / 2, height / 2),
       random(-1, 1),
-      random(-0.1, 0.1),
-      random(-1, 1),
-      random(-1, 1)
+      random(-0.05, 0.05),
+      random(-2, 2),
+      random(-2, 2)
     );
   }
+
+  button.addEventListener("click", toggleSong);
+
+  song.play();
+  fft = new p5.FFT();
+  sg[0] = new SoundGraph(width, height, 5);
+  sg[1] = new SoundGraph(-width, -height, 3);
+  sg[2] = new SoundGraph(width / 2, height / 2, 0);
 }
 
 function draw() {
@@ -236,30 +310,41 @@ function draw() {
   tint(100); // 영상 틴트
   image(capture, 0, 0, width, (width * capture.height) / capture.width);
   noTint(); // 이미지에는 틴트 안 씌워진다
+
+  for (let i = 0; i < sg.length; i++) {
+    sg[i].draw();
+  }
+
   if (count > img.length + 1) {
-    start = 0;
     count = 0;
     start = 0;
   }
-  if (count < 9) {
+
+  if (count < img.length + 1) {
     for (let i = start; i < count; i++) {
       images[i].draw();
       images[i].rotate();
       images[i].move();
+      images[i].reduce(); //(크기) 이미지 크기 변화 함수 추가
       if (i === 2) start = 2;
-      if (i === 3) start = 3;
-      if (i === 7) start = 7;
-      if (i === 8) start = 8;
+      if (i === 5) start = 5;
+      if (i === 9) start = 9;
+      if (i === 11) start = 11;
+      if (i === 13) start = 13;
+      if (i === 16) start = 16;
+      if (i === 21) start = 21;
+      if (i === 23) start = 23;
     }
   }
-  if (count === 9) {
-    for (let i = 0; i < 8; i++) {
+  if (count == img.length + 1) {
+    for (let i = 0; i < img.length; i++) {
       images[i].draw();
       images[i].rotate();
       images[i].move();
+      images[i].reduce(); //(크기) 이미지 크기 변화 함수 추가
     }
   }
-  console.log(count, img.length);
+  console.log(count);
 }
 
 function mousePressed() {
@@ -275,6 +360,8 @@ class Img {
     this.inc = inc;
     this.xSpeed = xSpeed;
     this.ySpeed = ySpeed;
+    this.w = img[this.i].width; //(크기) 이미지 너비
+    this.h = img[this.i].height; //(크기) 이미지 높이
   }
 
   draw() {
@@ -283,7 +370,7 @@ class Img {
     fill(255);
     translate(this.x, this.y);
     rotate(this.angle);
-    image(img[this.i], 0, 0, img[this.i].width, img[this.i].height);
+    image(img[this.i], 0, 0, this.w, this.h); //(크기) 이미지 크기 변수 수정
     pop();
   }
 
@@ -291,20 +378,67 @@ class Img {
     this.x += this.xSpeed;
     this.y += this.ySpeed;
 
-    if (
-      this.x > width - img[this.i].width / 2 ||
-      this.x < img[this.i].width / 2
-    ) {
+    if (this.x > width / 2 - img[this.i].width / 2) {
+      this.x = width / 2 - img[this.i].width / 2;
       this.xSpeed = this.xSpeed * -1;
     }
-    if (
-      this.y > height - img[this.i].height / 2 ||
-      this.y < img[this.i].height / 2
-    ) {
+    if (this.x < -width / 2 + img[this.i].width / 2) {
+      this.x = -width / 2 + img[this.i].width / 2;
+      this.xSpeed = this.xSpeed * -1;
+    }
+    if (this.y > height / 2 - img[this.i].height / 2) {
+      this.y = height / 2 - img[this.i].height / 2;
+      this.ySpeed = this.ySpeed * -1;
+    }
+    if (this.y < -height / 2 + img[this.i].height / 2) {
+      this.y = -height / 2 + img[this.i].height / 2;
       this.ySpeed = this.ySpeed * -1;
     }
   }
   rotate() {
     this.angle += this.inc;
+  }
+  reduce() {
+    //(크기) 이미지 크기 변화 함수
+    this.w = lerp(this.w, img[this.i].width * 0.5, 0.01);
+    this.h = lerp(this.h, img[this.i].height * 0.5, 0.01);
+  }
+}
+
+class SoundGraph {
+  constructor(x, y, size) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+  }
+
+  draw() {
+    fft.analyze();
+    let bass = fft.getEnergy("bass");
+    let treble = fft.getEnergy("treble");
+    let mid = fft.getEnergy("mid");
+
+    let t = 0;
+    phase += 0.01;
+
+    translate(this.x, this.y);
+    beginShape();
+    noFill();
+    stroke(255, 50);
+    strokeWeight(22);
+
+    let n = noise(offset);
+    offset += 0.01;
+    for (let a = 0; a < TWO_PI; a += 0.01) {
+      let xoff = map(cos(a + phase), -1, 1, 0, noiseMax);
+      let yoff = map(sin(a), -1, 1, 0, noiseMax);
+
+      let r = map(noise(xoff, yoff), 0, 1, 0, 1);
+      let x = r * cos(a) * bass * this.size;
+      let y = r * sin(a) * bass * this.size;
+      vertex(x, y);
+      t += 0.1;
+    }
+    endShape(CLOSE);
   }
 }
