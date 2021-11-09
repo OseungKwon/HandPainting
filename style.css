@@ -1,5 +1,9 @@
+html,
 body {
   background-color: #000;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 #canvas {
@@ -8,13 +12,11 @@ body {
 }
 #canvas1 {
   position: absolute;
-
   z-index: 1;
 }
 
 #video {
   position: absolute;
-
   z-index: -1;
 }
 
@@ -33,6 +35,10 @@ button {
 h1 {
   color: white;
   position: absolute;
-  bottom: 10px;
-  right: 50%;
+  bottom: -2rem;
+  text-align: center;
+  background-color: #000;
+  width: 100%;
+  padding: 1.5rem;
+  height: 5rem;
 }

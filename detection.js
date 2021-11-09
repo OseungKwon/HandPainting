@@ -269,10 +269,11 @@ function preload() {
   for (let i = 0; i < 23; i++) {
     img[i] = loadImage("img/" + i + ".png");
   }
-  song = loadSound("song.mp3");
+  song = loadSound("song.mp3"); ////////////////////////////// 19
 }
 
 function toggleSong() {
+  ////////////////////////// 22~28
   if (song.isPlaying()) {
     song.pause();
   } else {
@@ -285,6 +286,7 @@ function setup() {
   capture = createCapture(VIDEO);
   capture.hide();
   for (let i = 0; i < img.length; i++) {
+    ///////////////// 36, 이미지 x,y random(-width/2,width/2),random(-height/2,height/2)로 수정
     images[i] = new Img(
       i,
       random(-width / 2, width / 2),
@@ -296,13 +298,11 @@ function setup() {
     );
   }
 
-  button.addEventListener("click", toggleSong);
-
   song.play();
   fft = new p5.FFT();
-  sg[0] = new SoundGraph(width, height, 5);
-  sg[1] = new SoundGraph(-width, -height, 3);
-  sg[2] = new SoundGraph(width / 2, height / 2, 0);
+  sg[0] = new SoundGraph(width, height, 5, 50);
+  sg[1] = new SoundGraph(-width, -height, 3, 50);
+  sg[2] = new SoundGraph(width / 2, height / 2, 0, 0);
 }
 
 function draw() {
@@ -312,6 +312,7 @@ function draw() {
   noTint(); // 이미지에는 틴트 안 씌워진다
 
   for (let i = 0; i < sg.length; i++) {
+    //////////////////////// 54~56
     sg[i].draw();
   }
 
@@ -325,6 +326,7 @@ function draw() {
       images[i].draw();
       images[i].rotate();
       images[i].move();
+      //images[i].reduce(); //(크기) 이미지 크기 변화 함수 추가
       if (i === 2) start = 2;
       if (i === 5) start = 5;
       if (i === 9) start = 9;
@@ -340,6 +342,7 @@ function draw() {
       images[i].draw();
       images[i].rotate();
       images[i].move();
+      //images[i].reduce(); //(크기) 이미지 크기 변화 함수 추가
     }
   }
   console.log(count);
@@ -377,18 +380,22 @@ class Img {
     this.y += this.ySpeed;
 
     if (this.x > width / 2 - img[this.i].width / 2) {
+      ////////////////////// 수정. 원래 있던 코드 삭제하고 밑에 네 개 추가, 123~138
       this.x = width / 2 - img[this.i].width / 2;
       this.xSpeed = this.xSpeed * -1;
     }
     if (this.x < -width / 2 + img[this.i].width / 2) {
+      //////////////////////
       this.x = -width / 2 + img[this.i].width / 2;
       this.xSpeed = this.xSpeed * -1;
     }
     if (this.y > height / 2 - img[this.i].height / 2) {
+      ///////////////////////////
       this.y = height / 2 - img[this.i].height / 2;
       this.ySpeed = this.ySpeed * -1;
     }
     if (this.y < -height / 2 + img[this.i].height / 2) {
+      ////////////////////////////
       this.y = -height / 2 + img[this.i].height / 2;
       this.ySpeed = this.ySpeed * -1;
     }
@@ -396,13 +403,20 @@ class Img {
   rotate() {
     this.angle += this.inc;
   }
+  reduce() {
+    //(크기) 이미지 크기 변화 함수
+    this.w = lerp(this.w, img[this.i].width * 0.5, 0.01);
+    this.h = lerp(this.h, img[this.i].height * 0.5, 0.01);
+  }
 }
 
 class SoundGraph {
-  constructor(x, y, size) {
+  ///////////////////////////////// 140~177
+  constructor(x, y, size, al) {
     this.x = x;
     this.y = y;
     this.size = size;
+    this.al = al;
   }
 
   draw() {
@@ -417,7 +431,7 @@ class SoundGraph {
     translate(this.x, this.y);
     beginShape();
     noFill();
-    stroke(255, 50);
+    stroke(255, this.al);
     strokeWeight(22);
 
     let n = noise(offset);
