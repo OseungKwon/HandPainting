@@ -325,7 +325,6 @@ function draw() {
       images[i].draw();
       images[i].rotate();
       images[i].move();
-      images[i].reduce(); //(크기) 이미지 크기 변화 함수 추가
       if (i === 2) start = 2;
       if (i === 5) start = 5;
       if (i === 9) start = 9;
@@ -341,7 +340,6 @@ function draw() {
       images[i].draw();
       images[i].rotate();
       images[i].move();
-      images[i].reduce(); //(크기) 이미지 크기 변화 함수 추가
     }
   }
   console.log(count);
@@ -397,11 +395,6 @@ class Img {
   }
   rotate() {
     this.angle += this.inc;
-  }
-  reduce() {
-    //(크기) 이미지 크기 변화 함수
-    this.w = lerp(this.w, img[this.i].width * 0.5, 0.01);
-    this.h = lerp(this.h, img[this.i].height * 0.5, 0.01);
   }
 }
 
