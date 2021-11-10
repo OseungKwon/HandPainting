@@ -1,127 +1,143 @@
-let capture;
 let img = [];
-let count = 0;
 let images = [];
-let start = 0;
-
+let off = 300;
+let area;
+let spring = 0.05;
+let r = 700; //r값을 조절하면 화면 중심으로부터 튕기는 거리 조절
 function preload() {
-  for (let i = 0; i < 23; i++) {
+  for (let i = 0; i < 11; i++) {
     img[i] = loadImage("img/" + i + ".png");
   }
 }
 
 function setup() {
   createCanvas(1920, 1080);
-  capture = createCapture(VIDEO);
-  capture.hide();
-  for (let i = 0; i < img.length; i++) {
-    ///////////////// 36, 이미지 x,y random(-width/2,width/2),random(-height/2,height/2)로 수정
+  for (let i = 0; i < 6; i++) {
     images[i] = new Img(
       i,
-      random(-width / 2, width / 2),
-      random(-height / 2, height / 2),
+      random(0, width / 4),
+      random(0, height),
+      random(-1, 1),
+      random(-0.05, 0.05),
+      random(-1, 1),
+      random(-1, 1)
+    );
+  }
+  for (let i = 6; i < img.length; i++) {
+    images[i] = new Img(
+      i,
+      random((width / 4) * 3, width),
+      random(0, height),
       random(-1, 1),
       random(-0.05, 0.05),
       random(-2, 2),
       random(-2, 2)
     );
   }
+  area = new Area(width / 2, height / 2, r, r);
+}
 
-  function draw() {
-    imageMode(CORNER);
-    tint(100); // 영상 틴트
-    image(capture, 0, 0, width, (width * capture.height) / capture.width);
-    noTint(); // 이미지에는 틴트 안 씌워진다
+function draw() {
+  imageMode(CORNER);
+  background(0);
 
-    for (let i = 0; i < sg.length; i++) {
-      sg[i].draw();
-    }
+  for (let i = 0; i < img.length; i++) {
+    images[i].draw();
+    images[i].rotate();
+    images[i].move();
+    images[i].collide(area);
+  }
+  //area.draw(); //이 줄 없애면 가운데 원은 안 보이게 됩니다.
+  background(0, 100);
+}
 
-    if (count < img.length + 1) {
-      for (let i = start; i < count; i++) {
-        images[i].draw();
-        images[i].rotate();
-        images[i].move();
-        images[i].reduce(); //(크기) 이미지 크기 변화 함수 추가
-        if (i === 2) start = 2;
-        if (i === 5) start = 5;
-        if (i === 9) start = 9;
-        if (i === 11) start = 11;
-        if (i === 13) start = 13;
-        if (i === 16) start = 16;
-        if (i === 21) start = 21;
-        if (i === 23) start = 23;
-      }
-    }
-    if (count == img.length + 1) {
-      for (let i = 0; i < img.length; i++) {
-        images[i].draw();
-        images[i].rotate();
-        images[i].move();
-        images[i].reduce(); //(크기) 이미지 크기 변화 함수 추가
-      }
-    }
+class Img {
+  constructor(i, x, y, angle, inc, xSpeed, ySpeed) {
+    this.i = i;
+    this.x = x;
+    this.y = y;
+    this.angle = angle;
+    this.inc = inc;
+    this.xSpeed = xSpeed;
+    this.ySpeed = ySpeed;
+    this.w = img[this.i].width;
+    this.h = img[this.i].height;
   }
 
-  function mousePressed() {
-    count++;
+  draw() {
+    imageMode(CENTER);
+    push();
+    fill(255);
+    translate(this.x, this.y);
+    rotate(this.angle);
+    image(img[this.i], 0, 0, this.w, this.h);
+    pop();
+  }
+  rotate() {
+    this.angle += this.inc;
+  }
+  reduce() {
+    this.w = lerp(this.w, img[this.i].width * 0.5, 0.01);
+    this.h = lerp(this.h, img[this.i].height * 0.5, 0.01);
   }
 
-  class Img {
-    constructor(i, x, y, angle, inc, xSpeed, ySpeed) {
-      this.i = i;
-      this.x = x;
-      this.y = y;
-      this.angle = angle;
-      this.inc = inc;
-      this.xSpeed = xSpeed;
-      this.ySpeed = ySpeed;
-      this.w = img[this.i].width; //(크기) 이미지 너비
-      this.h = img[this.i].height; //(크기) 이미지 높이
-    }
+  move() {
+    this.x += this.xSpeed;
+    this.y += this.ySpeed;
 
-    draw() {
-      imageMode(CENTER);
-      push();
-      fill(255);
-      translate(this.x, this.y);
-      rotate(this.angle);
-      image(img[this.i], 0, 0, this.w, this.h); //(크기) 이미지 크기 변수 수정
-      pop();
+    if (this.x < this.w / 2) {
+      this.x = this.w / 2;
+      this.xSpeed = this.xSpeed * -1;
     }
+    if (this.x > width - this.w / 2) {
+      this.x = width - this.w / 2;
+      this.xSpeed = this.xSpeed * -1;
+    }
+    if (this.y < this.h / 2) {
+      this.y = this.h / 2;
+      this.ySpeed = this.ySpeed * -1;
+    }
+    if (this.y > height - this.h / 2) {
+      this.y = height - this.h / 2;
+      this.ySpeed = this.ySpeed * -1;
+    }
+    //     let d=dist(width/2,height/2,this.x,this.y);
+    //     if(d<off){
+    //       this.xSpeed=this.xSpeed*-1;
+    //       this.ySpeed=this.ySpeed*-1;
+    //     }
+  }
 
-    move() {
-      this.x += this.xSpeed;
-      this.y += this.ySpeed;
+  collide(other) {
+    let dx = other.x - this.x;
+    let dy = other.y - this.y;
+    let distance = sqrt(dx * dx + dy * dy);
+    let minDist;
+    if (this.w > this.h) {
+      minDist = other.r / 2 + this.w / 2;
+    } else {
+      minDist = other.r / 2 + this.h / 2;
+    }
+    if (distance < minDist) {
+      let angle = atan2(dy, dx);
+      let targetX = this.x + cos(angle) * minDist;
+      let targetY = this.y + sin(angle) * minDist;
+      let ax = (targetX - other.x) * spring;
+      let ay = (targetY - other.y) * spring;
 
-      if (this.x > width / 2 - img[this.i].width / 2) {
-        ////////////////////// 수정. 원래 있던 코드 삭제하고 밑에 네 개 추가, 123~138
-        this.x = width / 2 - img[this.i].width / 2;
-        this.xSpeed = this.xSpeed * -1;
-      }
-      if (this.x < -width / 2 + img[this.i].width / 2) {
-        //////////////////////
-        this.x = -width / 2 + img[this.i].width / 2;
-        this.xSpeed = this.xSpeed * -1;
-      }
-      if (this.y > height / 2 - img[this.i].height / 2) {
-        ///////////////////////////
-        this.y = height / 2 - img[this.i].height / 2;
-        this.ySpeed = this.ySpeed * -1;
-      }
-      if (this.y < -height / 2 + img[this.i].height / 2) {
-        ////////////////////////////
-        this.y = -height / 2 + img[this.i].height / 2;
-        this.ySpeed = this.ySpeed * -1;
-      }
+      this.xSpeed -= ax;
+      this.ySpeed -= ay;
     }
-    rotate() {
-      this.angle += this.inc;
-    }
-    reduce() {
-      //(크기) 이미지 크기 변화 함수
-      this.w = lerp(this.w, img[this.i].width * 0.5, 0.01);
-      this.h = lerp(this.h, img[this.i].height * 0.5, 0.01);
-    }
+  }
+}
+
+class Area {
+  constructor(x, y, r) {
+    this.x = x;
+    this.y = y;
+    this.r = r;
+  }
+  draw() {
+    circle(this.x, this.y, this.r);
   }
 }
