@@ -4,20 +4,27 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 #canvas {
   position: absolute;
   z-index: 10;
 }
+#output {
+  position: absolute;
+  z-index: 20;
+}
 #canvas1 {
   position: absolute;
   z-index: 1;
+  overflow: hidden;
 }
 
 #video {
   position: absolute;
   z-index: -1;
+  overflow: hidden;
 }
 
 .flipped {
@@ -42,4 +49,5 @@ h1 {
   padding: 1.5rem;
   height: 5rem;
   z-index: 111;
+  overflow: hidden;
 }

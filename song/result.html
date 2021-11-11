@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="html2canvas.js"></script>
+
+  <body>
+    result page
+    <canvas
+      id="output"
+      width="900"
+      height="600"
+      style="border: 1px solid #d3d3d3"
+    ></canvas>
+  </body>
+  <script>
+    image = localStorage.img;
+    drawImg(image);
+    function drawImg(imgData) {
+      console.log(imgData);
+      //imgData의 결과값을 console 로그롤 보실 수 있습니다.
+      return new Promise(
+        function reslove() {
+          //내가 결과 값을 그릴 canvas 부분 설정
+          var canvas = document.getElementById("output");
+          var ctx = canvas.getContext("2d");
+          //canvas의 뿌려진 부분 초기화
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          var imageObj = new Image();
+          imageObj.onload = function () {
+            ctx.drawImage(imageObj, 10, 10);
+            //canvas img를 그리겠다.
+          };
+          imageObj.src = imgData;
+          //그릴 image데이터를 넣어준다.
+        },
+        function reject() {}
+      );
+    }
+  </script>
+</html>
