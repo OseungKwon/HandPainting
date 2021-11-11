@@ -1,5 +1,14 @@
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
 html,
 body {
+  font-family: "Pretendard-Regular";
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -24,6 +33,9 @@ a {
 #menu {
   background-color: rgba(255, 255, 255, 70%);
   border-radius: 2rem;
+}
+.title {
+  font-family: "Mochiy Pop P One";
 }
 #main_title {
   font-size: 4rem;
@@ -88,4 +100,52 @@ a {
 #last_item:hover {
   border-bottom-left-radius: 2rem;
   border-bottom-right-radius: 2rem;
+}
+#result_frame {
+  position: absolute;
+  width: 1152px;
+  height: 648px;
+  border: 10px solid white;
+  border-radius: 1rem;
+  z-index: 100;
+}
+#result_title {
+  position: absolute;
+  color: white;
+  font-size: 4rem;
+  top: 4rem;
+}
+#download_icon {
+  position: absolute;
+  bottom: 15rem;
+  right: 28rem;
+  cursor: pointer;
+  z-index: 100;
+}
+
+#result_share {
+  bottom: 5rem;
+  font-size: 2rem;
+  position: absolute;
+  color: white;
+  border: 1px solid white;
+  border-radius: 2rem;
+  padding: 0.2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+#result_share:hover {
+  background-color: rgba(255, 255, 255, 30%);
+}
+#home {
+  position: absolute;
+  z-index: 100;
+  left: 4rem;
+  top: 4rem;
+  padding: 0.5rem;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  border: 5px solid white;
+  background-color: rgba(255, 255, 255, 70%);
+  border-radius: 50%;
 }

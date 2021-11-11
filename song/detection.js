@@ -309,7 +309,7 @@ function setup() {
 
 function draw() {
   imageMode(CORNER);
-  tint(100); // 영상 틴트
+  tint(0); // 영상 틴트
   image(capture, 0, 0, width, (width * capture.height) / capture.width);
   noTint(); // 이미지에는 틴트 안 씌워진다
 
@@ -324,6 +324,7 @@ function draw() {
   }
 
   if (count < img.length + 1) {
+    content.id = "none";
     for (let i = start; i < count; i++) {
       images[i].draw();
       images[i].rotate();
@@ -351,17 +352,18 @@ function draw() {
 }
 
 function keyPressed() {
-  content.class = "none";
+  content.id = "none";
   html2canvas(document.body)
     //document에서 body 부분을 스크린샷을 함.
     .then(function (canvas) {
       //canvas 결과값을 drawImg 함수를 통해서
       //결과를 canvas 넘어줌.
       //png의 결과 값
-
+      downImage = canvas.toDataURL();
       image = canvas.toDataURL("image/png");
       console.log(image);
       localStorage.img = image;
+      localStorage.downImg = downImage;
       location.replace("../result.html");
     })
     .catch(function (err) {

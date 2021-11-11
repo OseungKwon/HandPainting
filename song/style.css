@@ -48,6 +48,6 @@ h1 {
   height: 5rem;
   z-index: 111;
 }
-.none {
+#none {
   display: none;
 }
