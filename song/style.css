@@ -18,13 +18,11 @@ body {
 #canvas1 {
   position: absolute;
   z-index: 1;
-  overflow: hidden;
 }
 
 #video {
   position: absolute;
   z-index: -1;
-  overflow: hidden;
 }
 
 .flipped {
@@ -49,5 +47,7 @@ h1 {
   padding: 1.5rem;
   height: 5rem;
   z-index: 111;
-  overflow: hidden;
+}
+.none {
+  display: none;
 }

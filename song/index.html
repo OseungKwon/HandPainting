@@ -8,8 +8,7 @@
 
   <body>
     <video id="video" width="1920" height="1080"></video>
-    <button id="button">sound</button>
-    <!-- <button id="capture" onclick="partShot()">capture</button> -->
+    <!-- <button id="button">sound</button> -->
     <h1 id="content"></h1>
   </body>
   <script
@@ -31,7 +30,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.js"></script>
   <script src="p5.sound.min.js"></script>
-  <!-- <script src="html2canvas.js"></script> -->
+  <script src="html2canvas.js"></script>
 
   <script
     defer
@@ -45,65 +44,4 @@
     type="text/javascript"
     src="sketch.js"
   ></script>
-  <!-- <script>
-    var image;
-    function partShot() {
-      //특정부분 스크린샷
-      html2canvas(document.body)
-        //document에서 body 부분을 스크린샷을 함.
-        .then(function (canvas) {
-          //canvas 결과값을 drawImg 함수를 통해서
-          //결과를 canvas 넘어줌.
-          //png의 결과 값
-          location.replace("result.html");
-          image = canvas.toDataURL("image/png");
-          console.log(image);
-          localStorage.img = image;
-          drawImg(canvas.toDataURL("image/png"));
-
-          //appendchild 부분을 주석을 풀게 되면 body
-          //document.body.appendChild(canvas);
-
-          //특별부록 파일 저장하기 위한 부분.
-          // saveAs(canvas.toDataURL(), "file-name.png");
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
-    }
-    function drawImg(imgData) {
-      console.log(imgData);
-      //imgData의 결과값을 console 로그롤 보실 수 있습니다.
-      return new Promise(
-        function reslove() {
-          //내가 결과 값을 그릴 canvas 부분 설정
-          var canvas = document.getElementById("k");
-          var ctx = canvas.getContext("2d");
-          //canvas의 뿌려진 부분 초기화
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-          var imageObj = new Image();
-          imageObj.onload = function () {
-            ctx.drawImage(imageObj, 10, 10);
-            //canvas img를 그리겠다.
-          };
-          imageObj.src = imgData;
-          //그릴 image데이터를 넣어준다.
-        },
-        function reject() {}
-      );
-    }
-    function saveAs(uri, filename) {
-      var link = document.createElement("a");
-      if (typeof link.download === "string") {
-        link.href = uri;
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
-        window.open(uri);
-      }
-    }
-  </script> -->
 </html>

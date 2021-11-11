@@ -10,7 +10,7 @@ body {
 a {
   text-decoration: none;
 }
-.root {
+#root {
   position: absolute;
   background: none;
   display: flex;

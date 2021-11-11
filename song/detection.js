@@ -6,6 +6,8 @@ let count = 0;
 
 */
 const videoElement = document.getElementById("video");
+const content = document.getElementById("content");
+
 const button = document.querySelector(".button");
 const hands = new Hands({
   locateFile: (file) => {
@@ -346,6 +348,25 @@ function draw() {
     }
   }
   console.log(count);
+}
+
+function keyPressed() {
+  content.class = "none";
+  html2canvas(document.body)
+    //document에서 body 부분을 스크린샷을 함.
+    .then(function (canvas) {
+      //canvas 결과값을 drawImg 함수를 통해서
+      //결과를 canvas 넘어줌.
+      //png의 결과 값
+
+      image = canvas.toDataURL("image/png");
+      console.log(image);
+      localStorage.img = image;
+      location.replace("../result.html");
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
 }
 
 function mousePressed() {
