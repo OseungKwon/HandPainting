@@ -40,7 +40,7 @@ a {
 #menu {
   background-color: rgba(255, 255, 255, 70%);
   border-radius: 2rem;
-  margin-bottom: 19rem;
+  margin-bottom: 18rem;
 }
 .title {
   font-family: "Mochiy Pop P One";
@@ -88,29 +88,31 @@ a {
 #list {
   display: flex;
   flex-direction: column;
-  height: 17rem;
+  height: 18rem;
   overflow: scroll;
 }
 .item {
   text-align: center;
   font-weight: bold;
   font-size: 1.5rem;
-  padding-top: 1.5rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-top: 1.6rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
   color: #4a4a4a;
-  /* border-bottom: 2.6px solid #aaaaaa; */
 }
 .item:after {
   content: "";
   display: block;
-  width: 50rem;
-  margin-top: 1.5rem;
-  border-bottom: 2.6px solid #aaaaaa;
+  width: 48rem;
+  margin-top: 1.6rem;
+  border-bottom: 3px solid #9f9f9f;
 }
 .item:hover {
   color: white;
   background-color: #2441dd;
+}
+.item:hover::after {
+  border: none;
 }
 #last_item:hover {
   border-bottom-left-radius: 2rem;
