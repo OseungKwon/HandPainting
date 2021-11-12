@@ -37,7 +37,7 @@ button {
   cursor: pointer;
   z-index: 111;
 }
-h1 {
+#content {
   color: white;
   position: absolute;
   bottom: -2rem;
@@ -48,6 +48,21 @@ h1 {
   height: 5rem;
   z-index: 111;
 }
+#loading {
+  font-size: 3rem;
+  color: white;
+}
 #none {
   display: none;
+}
+#root {
+  position: absolute;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  /* background-color: orange; */
+  justify-content: center;
+  align-items: center;
 }

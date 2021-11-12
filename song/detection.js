@@ -7,6 +7,7 @@ let count = 0;
 */
 const videoElement = document.getElementById("video");
 const content = document.getElementById("content");
+const loading = document.getElementById("loading");
 
 const button = document.querySelector(".button");
 const hands = new Hands({
@@ -160,10 +161,24 @@ function setup() {
     );
   }
 
-  setTimeout(songplay, 3000);
+  setTimeout(loading1, 500);
+  function loading1() {
+    loading.innerHTML = "loading.";
+    setTimeout(loading2, 500);
+  }
+  function loading2() {
+    loading.innerHTML = "loading..";
+    setTimeout(loading3, 500);
+  }
+  function loading3() {
+    loading.innerHTML = "loading...";
+    setTimeout(songplay, 400);
+  }
   function songplay() {
+    loading.id = "none";
     song.play();
   }
+
   fft = new p5.FFT();
   sg[0] = new SoundGraph(width, height, 5, 50);
   sg[1] = new SoundGraph(-width, -height, 3, 50);
@@ -172,7 +187,7 @@ function setup() {
 
 function draw() {
   imageMode(CORNER);
-  tint(100); // 영상 틴트
+  tint(0); // 영상 틴트
   image(capture, 0, 0, width, (width * capture.height) / capture.width);
   noTint(); // 이미지에는 틴트 안 씌워진다
 
@@ -201,7 +216,6 @@ function draw() {
     }
   }
   if (count == img.length + 1) {
-    background(0);
     for (let i = 0; i < img.length; i++) {
       images[i].draw();
       images[i].rotate();
