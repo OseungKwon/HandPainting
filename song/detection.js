@@ -187,7 +187,7 @@ function setup() {
 
 function draw() {
   imageMode(CORNER);
-  tint(0); // 영상 틴트
+  tint(100); // 영상 틴트
   image(capture, 0, 0, width, (width * capture.height) / capture.width);
   noTint(); // 이미지에는 틴트 안 씌워진다
 
@@ -216,6 +216,7 @@ function draw() {
     }
   }
   if (count == img.length + 1) {
+    background(0);
     for (let i = 0; i < img.length; i++) {
       images[i].draw();
       images[i].rotate();
@@ -224,10 +225,7 @@ function draw() {
   }
   console.log(count);
   if (count <= 23) abc(count);
-  else {
-    //background(0);
-    content.id = "none";
-  }
+  else content.id = "none";
 }
 
 function keyPressed() {
