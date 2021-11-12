@@ -62,7 +62,7 @@ a {
   background-color: white;
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
-  padding-top: 0.5rem;
+  padding: 1.5rem;
 }
 #startButton {
   font-size: 2rem;
@@ -167,5 +167,5 @@ a {
   border-radius: 50%;
 }
 #music_icon {
-  height: 7rem;
+  height: 3rem;
 }
