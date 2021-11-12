@@ -216,11 +216,13 @@ function draw() {
   }
   console.log(count);
   if (count <= 23) abc(count);
-  else content.id = "none";
+  else {
+    //background(0);
+    content.id = "none";
+  }
 }
 
 function keyPressed() {
-  //background(0);
   content.id = "none";
   html2canvas(document.body)
     //document에서 body 부분을 스크린샷을 함.
