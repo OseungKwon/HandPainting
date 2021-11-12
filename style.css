@@ -30,9 +30,17 @@ a {
   justify-content: center;
   align-items: center;
 }
+#copyright {
+  position: absolute;
+  color: white;
+  top: 2rem;
+  left: 3rem;
+  font-size: 1.5rem;
+}
 #menu {
   background-color: rgba(255, 255, 255, 70%);
   border-radius: 2rem;
+  margin-bottom: 19rem;
 }
 .title {
   font-family: "Mochiy Pop P One";
@@ -46,16 +54,15 @@ a {
   color: white;
   padding: 2rem;
   margin-bottom: 3rem;
-  font-size: 4rem;
+  font-size: 3rem;
+  margin-bottom: 10rem;
 }
 #menu_title {
   text-align: center;
-  font-size: 2.5rem;
-  color: #2441dd;
   background-color: white;
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
-  padding: 1.5rem;
+  padding-top: 0.5rem;
 }
 #startButton {
   font-size: 2rem;
@@ -81,17 +88,25 @@ a {
 #list {
   display: flex;
   flex-direction: column;
-  height: 20rem;
+  height: 17rem;
   overflow: scroll;
 }
 .item {
   text-align: center;
+  font-weight: bold;
   font-size: 1.5rem;
-  padding: 1.5rem;
-  padding-left: 20rem;
-  padding-right: 20rem;
-  color: black;
-  border-bottom: 1px solid black;
+  padding-top: 1.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  color: #4a4a4a;
+  /* border-bottom: 2.6px solid #aaaaaa; */
+}
+.item:after {
+  content: "";
+  display: block;
+  width: 50rem;
+  margin-top: 1.5rem;
+  border-bottom: 2.6px solid #aaaaaa;
 }
 .item:hover {
   color: white;
@@ -148,4 +163,7 @@ a {
   border: 5px solid white;
   background-color: rgba(255, 255, 255, 70%);
   border-radius: 50%;
+}
+#music_icon {
+  height: 7rem;
 }
