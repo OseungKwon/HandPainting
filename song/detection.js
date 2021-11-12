@@ -13,13 +13,13 @@ const button = document.querySelector(".button");
 const hands = new Hands({
   locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.3.1632795355/${file}`;
-  }
+  },
 });
 
 hands.setOptions({
   maxNumHands: 2,
   minDetectionConfidence: 0.8,
-  minTrackingConfidence: 0.5
+  minTrackingConfidence: 0.5,
 });
 
 hands.onResults(gotHands);
@@ -121,7 +121,7 @@ const camera = new Camera(videoElement, {
     await hands.send({ image: videoElement });
   },
   width: 1920,
-  height: 1080
+  height: 1080,
 });
 camera.start();
 
@@ -229,25 +229,26 @@ function draw() {
     content.id = "none";
   }
 }
-
-function keyPressed() {
-  content.id = "none";
-  html2canvas(document.body)
-    //document에서 body 부분을 스크린샷을 함.
-    .then(function (canvas) {
-      //canvas 결과값을 drawImg 함수를 통해서
-      //결과를 canvas 넘어줌.
-      //png의 결과 값
-      downImage = canvas.toDataURL();
-      image = canvas.toDataURL("image/png");
-      console.log(image);
-      localStorage.img = image;
-      localStorage.downImg = downImage;
-      location.replace("../result.html");
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
+function keyTyped() {
+  if (key === "a") {
+    content.id = "none";
+    html2canvas(document.body)
+      //document에서 body 부분을 스크린샷을 함.
+      .then(function (canvas) {
+        //canvas 결과값을 drawImg 함수를 통해서
+        //결과를 canvas 넘어줌.
+        //png의 결과 값
+        downImage = canvas.toDataURL();
+        image = canvas.toDataURL("image/png");
+        console.log(image);
+        localStorage.img = image;
+        localStorage.downImg = downImage;
+        location.replace("../result.html");
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
 }
 
 function mousePressed() {
