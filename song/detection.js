@@ -20,227 +20,96 @@ hands.setOptions({
   minDetectionConfidence: 0.8,
   minTrackingConfidence: 0.5
 });
-
-hands.onResults(gotHands);
-function gotHands(results) {
-  detections = results;
-  hand = detections.multiHandLandmarks;
-  //console.log(detections);
-  //console.log(hand.length);
-  if (hand.length === 1) {
-    if (
-      // z축과 동일(오른손만)
-      Math.abs(hand[0][5].z - hand[0][9].z) < 0.1 &&
-      Math.abs(hand[0][4].z - hand[0][8].z) < 0.1 &&
-      hand[0][16].y < hand[0][13].y
-    ) {
-      if (count === 2 || count === 13) {
-        count++;
-        console.log(count);
-        console.log("참");
-        document.getElementById("content").innerHTML = "참";
-      }
-    }
-    if (
-      //검지만 펴져있는 손 모양(오른손만)
-      hand[0][12].y > hand[0][9].y &&
-      hand[0][16].y > hand[0][13].y &&
-      hand[0][20].y > hand[0][17].y &&
-      hand[0][8].y < hand[0][5].y
-    ) {
-      if (count === 1 || count === 12) {
-        count++;
-        console.log(count);
-        document.getElementById("content").innerHTML = "이 한마디";
-        console.log("이 한마디");
-      }
-      if (count === 1 || count === 16) {
-        count++;
-        console.log(count);
-        document.getElementById("content").innerHTML = "엄마";
-        console.log("엄마");
-      }
-    }
-    if (hand[0][0].x > hand[0][12].x && hand[0][4].y < hand[0][20].y) {
-      if (count === 19) {
-        count++;
-        console.log(count);
-        document.getElementById("content").innerHTML = "갈";
-        console.log("갈");
-      }
-    }
-    if (
-      hand[0][20].y > hand[0][4].y &&
-      hand[0][6].x < hand[0][8].x &&
-      hand[0][10].x < hand[0][12].x &&
-      hand[0][14].x < hand[0][16].x
-    ) {
-      if (count === 17) {
-        count++;
-        console.log(count);
-        document.getElementById("content").innerHTML = "아빠";
-        console.log("아빠");
-      }
-    }
-    if (
-      hand[0][5].x > hand[0][8].x &&
-      hand[0][9].x > hand[0][12].x &&
-      hand[0][13].x > hand[0][16].x &&
-      hand[0][1].x > hand[0][4].x
-    ) {
-      if (count === 5) {
-        count++;
-        console.log(count);
-        console.log("우리");
-        document.getElementById("content").innerHTML = "우리";
-      }
-    }
-
-    if (
-      // 주먹 쥔 모양(오른손만)
-      hand[0][12].y < hand[0][9].y &&
-      hand[0][16].y < hand[0][13].y &&
-      hand[0][20].y < hand[0][17].y &&
-      hand[0][8].y < hand[0][5].y
-    ) {
-      if (count === 3 || count === 14) {
-        count++;
-        console.log(count);
-        console.log("좋은");
-        document.getElementById("content").innerHTML = "좋은";
-      }
-    }
+function abc(count) {
+  if (count === 3 || count === 14) {
+    console.log(count);
+    console.log("참");
+    document.getElementById("content").innerHTML = "참";
   }
-  if (hand.length === 2) {
-    if (
-      hand[0][0].x < hand[0][12].x &&
-      hand[1][0].x > hand[1][12].x &&
-      hand[0][5].y > hand[0][8].y &&
-      hand[0][13].y > hand[0][16].y
-    ) {
-      if (count === 6) {
-        count++;
-        console.log(count);
-        console.log("식구");
-        document.getElementById("content").innerHTML = "식구";
-      }
-    }
-    if (
-      hand[0][0].x > hand[0][12].x &&
-      hand[1][0].x < hand[1][12].x &&
-      hand[0][0].y < hand[0][8].y
-    ) {
-      if (count === 18) {
-        count++;
-        console.log(count);
-        console.log("일터");
-        document.getElementById("content").innerHTML = "일터";
-      }
-    }
-    if (
-      Math.abs(
-        // 바닥과 수평된 손모양(오른손)
-        hand[0][4].y - hand[0][20].y
-      ) < 0.1 && // 주먹쥐고 있는 손 모양(왼손)
-      hand[1][9].x < hand[1][10].x &&
-      hand[1][10].x > hand[1][12].x &&
-      hand[1][14].x > hand[1][16].x &&
-      hand[1][18].x > hand[1][20].x
-    ) {
-      if (count === 0 || count === 11) {
-        count++;
-        console.log(count);
-        console.log("사랑해요");
-        document.getElementById("content").innerHTML = "사랑해요";
-      }
-    }
-    if (
-      //검지만 펴져있는 손 모양(오른손)
-      hand[0][5].y > hand[0][8].y &&
-      hand[0][12].y > hand[0][9].y &&
-      hand[0][16].y > hand[0][13].y &&
-      hand[0][20].y > hand[0][17].y &&
-      hand[0][4].x < hand[0][3].x
-    ) {
-      if (
-        //검지만 펴져있는 손 모양(왼손)
-        hand[1][5].y > hand[1][8].y &&
-        hand[1][12].y > hand[1][9].y &&
-        hand[1][16].y > hand[1][13].y &&
-        hand[1][20].y > hand[1][17].y &&
-        hand[1][4].x > hand[1][3].x
-      ) {
-        if (count === 4 || count === 10 || count === 15 || count === 22) {
-          count++;
-          console.log(count);
-          console.log("말");
-          document.getElementById("content").innerHTML = "말";
-        }
-      }
-    }
-    if (
-      hand[0][8].x > hand[0][0].x &&
-      hand[0][16].x > hand[0][13].x &&
-      hand[1][8].x > hand[1][0].x &&
-      hand[1][16].x > hand[1][13].x
-    ) {
-      if (count === 7) {
-        count++;
-        console.log(count);
-        console.log("자고");
-        document.getElementById("content").innerHTML = "자고";
-      }
-    }
-    if (
-      //검지만 펴져있는 손 모양(오른손)
-      hand[0][5].y > hand[0][8].y &&
-      hand[0][12].y > hand[0][9].y &&
-      hand[0][16].y > hand[0][13].y &&
-      hand[0][20].y > hand[0][17].y &&
-      hand[0][4].x > hand[0][3].x
-    ) {
-      if (
-        //검지만 펴져있는 손 모양(왼손)
-        hand[1][5].y > hand[1][8].y &&
-        hand[1][12].y > hand[1][9].y &&
-        hand[1][16].y > hand[1][13].y &&
-        hand[1][20].y > hand[1][17].y &&
-        hand[1][4].x < hand[1][3].x
-      ) {
-        if (count === 8) {
-          count++;
-          console.log(count);
-          console.log("나면");
-          document.getElementById("content").innerHTML = "나면";
-        }
-      }
-    }
-    if (
-      hand[0][4].x < hand[0][17].x &&
-      hand[0][0].z > hand[0][12].z &&
-      hand[1][0].z > hand[1][12].z &&
-      hand[0][2].z > hand[0][4].z &&
-      hand[0][5].y > hand[0][8].y &&
-      hand[0][13].y > hand[0][16].y
-    ) {
-      if (count === 9 || count === 21) {
-        count++;
-        console.log(count);
-        console.log("주고받는");
-        document.getElementById("content").innerHTML = "주고받는";
-      }
-    }
-    if (hand[1][0].z > hand[1][12].z && hand[0][0].y < hand[0][12].y) {
-      if (count === 20) {
-        count++;
-        console.log(count);
-        console.log("때");
-        document.getElementById("content").innerHTML = "때";
-      }
-    }
+
+  if (count === 2 || count === 13) {
+    console.log(count);
+    document.getElementById("content").innerHTML = "이 한마디";
+    console.log("이 한마디");
+  }
+  if (count === 17) {
+    console.log(count);
+    document.getElementById("content").innerHTML = "엄마";
+    console.log("엄마");
+  }
+
+  if (count === 20) {
+    console.log(count);
+    document.getElementById("content").innerHTML = "갈";
+    console.log("갈");
+  }
+
+  if (count === 18) {
+    console.log(count);
+    document.getElementById("content").innerHTML = "아빠";
+    console.log("아빠");
+  }
+
+  if (count === 6) {
+    console.log(count);
+    console.log("우리");
+    document.getElementById("content").innerHTML = "우리";
+  }
+
+  if (count === 4 || count === 15) {
+    console.log(count);
+    console.log("좋은");
+    document.getElementById("content").innerHTML = "좋은";
+  }
+
+  if (count === 7) {
+    console.log(count);
+    console.log("식구");
+    document.getElementById("content").innerHTML = "식구";
+  }
+
+  if (count === 19) {
+    console.log(count);
+    console.log("일터");
+    document.getElementById("content").innerHTML = "일터";
+  }
+
+  if (count === 1 || count === 12) {
+    console.log(count);
+    console.log("사랑해요");
+    document.getElementById("content").innerHTML = "사랑해요";
+  }
+
+  if (count === 5 || count === 11 || count === 16 || count === 23) {
+    console.log(count);
+    console.log("말");
+    document.getElementById("content").innerHTML = "말";
+  }
+
+  if (count === 8) {
+    console.log(count);
+    console.log("자고");
+    document.getElementById("content").innerHTML = "자고";
+  }
+
+  if (count === 9) {
+    console.log(count);
+    console.log("나면");
+    document.getElementById("content").innerHTML = "나면";
+  }
+
+  if (count === 10 || count === 22) {
+    console.log(count);
+    console.log("주고받는");
+    document.getElementById("content").innerHTML = "주고받는";
+  }
+
+  if (count === 21) {
+    console.log(count);
+    console.log("때");
+    document.getElementById("content").innerHTML = "때";
   }
 }
-
 const camera = new Camera(videoElement, {
   onFrame: async () => {
     await hands.send({ image: videoElement });
@@ -317,14 +186,11 @@ function draw() {
     //////////////////////// 54~56
     sg[i].draw();
   }
-
   if (count > img.length + 1) {
     count = 0;
     start = 0;
   }
-
   if (count < img.length + 1) {
-    content.id = "none";
     for (let i = start; i < count; i++) {
       images[i].draw();
       images[i].rotate();
@@ -349,9 +215,12 @@ function draw() {
     }
   }
   console.log(count);
+  if (count <= 23) abc(count);
+  else content.id = "none";
 }
 
 function keyPressed() {
+  //background(0);
   content.id = "none";
   html2canvas(document.body)
     //document에서 body 부분을 스크린샷을 함.
