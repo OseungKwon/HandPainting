@@ -201,11 +201,11 @@ function draw() {
     }
   }
   if (count == img.length + 1) {
+    background(0);
     for (let i = 0; i < img.length; i++) {
       images[i].draw();
       images[i].rotate();
       images[i].move();
-      //images[i].reduce(); //(크기) 이미지 크기 변화 함수 추가
     }
   }
   console.log(count);
