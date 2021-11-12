@@ -20,6 +20,11 @@ hands.setOptions({
   minDetectionConfidence: 0.8,
   minTrackingConfidence: 0.5
 });
+
+hands.onResults(gotHands);
+function gotHands(results) {
+  detections = results;
+}
 function abc(count) {
   if (count === 3 || count === 14) {
     console.log(count);
@@ -119,10 +124,6 @@ const camera = new Camera(videoElement, {
 });
 camera.start();
 
-function flipVideo() {
-  videoElement.classList.toggle("flipped");
-}
-
 //------- Condortable p5 world :))))) -------//
 let capture;
 let img = [];
@@ -143,21 +144,11 @@ function preload() {
   song = loadSound("song.mp3"); ////////////////////////////// 19
 }
 
-function toggleSong() {
-  ////////////////////////// 22~28
-  if (song.isPlaying()) {
-    song.pause();
-  } else {
-    song.play();
-  }
-}
-
 function setup() {
   createCanvas(1920, 1080);
   capture = createCapture(VIDEO);
   capture.hide();
   for (let i = 0; i < img.length; i++) {
-    ///////////////// 36, 이미지 x,y random(-width/2,width/2),random(-height/2,height/2)로 수정
     images[i] = new Img(
       i,
       random(-width / 2, width / 2),
@@ -169,7 +160,10 @@ function setup() {
     );
   }
 
-  song.play();
+  setTimeout(songplay, 3000);
+  function songplay() {
+    song.play();
+  }
   fft = new p5.FFT();
   sg[0] = new SoundGraph(width, height, 5, 50);
   sg[1] = new SoundGraph(-width, -height, 3, 50);
@@ -178,7 +172,7 @@ function setup() {
 
 function draw() {
   imageMode(CORNER);
-  tint(0); // 영상 틴트
+  tint(100); // 영상 틴트
   image(capture, 0, 0, width, (width * capture.height) / capture.width);
   noTint(); // 이미지에는 틴트 안 씌워진다
 
