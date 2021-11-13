@@ -26,7 +26,7 @@ hands.onResults(gotHands);
 function gotHands(results) {
   detections = results;
 }
-function abc(count) {
+function motion(count) {
   if (count === 3 || count === 14) {
     console.log(count);
     console.log("참");
@@ -224,7 +224,7 @@ function draw() {
     }
   }
   console.log(count);
-  if (count <= 23) abc(count);
+  if (count <= 23) motion(count);
   else content.id = "none";
 }
 
