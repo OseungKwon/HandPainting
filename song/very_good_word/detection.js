@@ -241,7 +241,7 @@ function keyPressed() {
       console.log(image);
       localStorage.img = image;
       localStorage.downImg = downImage;
-      location.replace("../result.html");
+      location.replace("../output_song.html");
     })
     .catch(function (err) {
       console.log(err);
