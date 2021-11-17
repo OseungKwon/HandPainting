@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="html2canvas.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="root">
+      <a id="home" href="index.html"><img src="home.png" /></a>
+      <div id="result_title" class="title">HANDPAINTING</div>
+      <canvas
+        id="output"
+        width="1152"
+        height="648"
+        style="border: 1px solid #d3d3d3"
+      ></canvas>
+      <div id="result_frame"></div>
+      <div onclick="download()">
+        <img id="download_icon" src="downloadPNG.png" />
+      </div>
+      <a id="result_share" href="#">SNS 공유</a>
+    </div>
+  </body>
+  <script>
+    drawImg(localStorage.img);
+    function drawImg(imgData) {
+      console.log(imgData);
+      //imgData의 결과값을 console 로그롤 보실 수 있습니다.
+      return new Promise(
+        function reslove() {
+          //내가 결과 값을 그릴 canvas 부분 설정
+
+          var canvas = document.getElementById("output");
+          var ctx = canvas.getContext("2d");
+          //canvas의 뿌려진 부분 초기화
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          var imageObj = new Image();
+          imageObj.onload = function () {
+            ctx.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
+            //canvas img를 그리겠다.
+          };
+          imageObj.src = imgData;
+          //그릴 image데이터를 넣어준다.
+        },
+        function reject() {}
+      );
+    }
+    function download() {
+      saveAs(localStorage.downImg, "HANDPAINTING.png");
+    }
+    function saveAs(uri, filename) {
+      var link = document.createElement("a");
+      if (typeof link.download === "string") {
+        link.href = uri;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        window.open(uri);
+      }
+    }
+  </script>
+  <script src="p5.js"></script>
+  <script src="background.js"></script>
+</html>
