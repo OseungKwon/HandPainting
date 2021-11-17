@@ -1,6 +1,6 @@
 # HANDPAINTING Project
 
-### 수화를 통해 청각 예술인 음악을 시각 예술로 바꾸어주는 새로운 예술활동 서비스
+### 수화를 통해 청각 예술의 한 분야인 음악을, 시각 예술로 바꾸어주는 새로운 예술활동 서비스
 
 > ### Tech
 
@@ -14,11 +14,11 @@
 > ### Project Like
 >
 > 프로젝트를 직접 확인하고 싶다면, 아래 링크를 눌러서 사이트에 들어가세요.
-
 - https://oseungkwon.github.io/HandPainting/
-  > ### Introduction
-  >
-  > ![장표이미지](https://user-images.githubusercontent.com/54261116/141686391-f56ae52f-e81c-4300-89e0-d2a38c4dd277.png)
+
+> ### Introduction
+> 
+![장표이미지](https://user-images.githubusercontent.com/54261116/141686391-f56ae52f-e81c-4300-89e0-d2a38c4dd277.png)
 
 ---
 
