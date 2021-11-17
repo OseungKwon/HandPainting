@@ -1,10 +1,16 @@
-# ML_contest
-Visualization ml
+# HANDPAINTING Project
+### 수화를 통해 청각 예술인 음악을 시각 예술로 바꾸어주는 새로운 예술활동 서비스
+> ### Tech
+* JavaScript, P5.js
 
-I referred to here.
-(https://github.com/Creativeguru97/YouTube_tutorial/tree/master/Play_with_APIs/hand_detection/mediapipe_hands/final)
+> ### Member
+* Programming: 권오승, 권예지
+* Design: 신주민, 유지민
 
+> ### Introduction
 ![장표이미지](https://user-images.githubusercontent.com/54261116/141686391-f56ae52f-e81c-4300-89e0-d2a38c4dd277.png)
+
+___
 
 ## Main Page
 ![image](https://user-images.githubusercontent.com/54261116/142198938-485e8b12-97e3-4486-9273-89913d5ac760.png)
