@@ -20,7 +20,7 @@
 
 > ### Introduction
 > 
-![장표이미지](https://user-images.githubusercontent.com/54261116/141686391-f56ae52f-e81c-4300-89e0-d2a38c4dd277.png)
+![Frame 67](https://user-images.githubusercontent.com/54261116/145536601-9cdd97ca-c5e4-48d3-b803-3eafd9dd189a.png)
 
 ---
 
