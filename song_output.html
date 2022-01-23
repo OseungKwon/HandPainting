@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="html2canvas.js"></script>
+    <script src="./library/html2canvas.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap"
       rel="stylesheet"
@@ -14,20 +14,18 @@
   </head>
 
   <body>
-    <div id="root">
+    <div id="result_root">
       <a id="home" href="index.html"><img src="home.png" /></a>
-      <div id="result_title" class="title">HANDPAINTING</div>
-      <canvas
-        id="output"
-        width="1152"
-        height="648"
-        style="border: 1px solid #d3d3d3"
-      ></canvas>
+      <img id="menu_logo" src="logo.png" />
+      <div id="explain">Express freely more than anyone else</div>
+      <canvas id="output" width="1152" height="648"></canvas>
       <div id="result_frame"></div>
       <div onclick="download()">
         <img id="download_icon" src="downloadPNG.png" />
       </div>
-      <a id="result_share" href="#">SNS 공유</a>
+      <a id="result_share" href="#"
+        ><img id="share_icon" src="sharePNG.png"
+      /></a>
     </div>
   </body>
   <script>
@@ -71,6 +69,6 @@
       }
     }
   </script>
-  <script src="p5.js"></script>
+  <script src="./library/p5.js"></script>
   <script src="background.js"></script>
 </html>
