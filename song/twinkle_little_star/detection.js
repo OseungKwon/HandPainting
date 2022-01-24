@@ -13,13 +13,13 @@ const button = document.querySelector(".button");
 const hands = new Hands({
   locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.3.1632795355/${file}`;
-  }
+  },
 });
 
 hands.setOptions({
   maxNumHands: 2,
   minDetectionConfidence: 0.8,
-  minTrackingConfidence: 0.5
+  minTrackingConfidence: 0.5,
 });
 
 hands.onResults(gotHands);
@@ -63,7 +63,7 @@ const camera = new Camera(videoElement, {
     await hands.send({ image: videoElement });
   },
   width: 1920,
-  height: 1080
+  height: 1080,
 });
 camera.start();
 
@@ -203,8 +203,8 @@ class Img {
     this.inc = inc;
     this.xSpeed = xSpeed;
     this.ySpeed = ySpeed;
-    this.w = img[this.i].width; //(크기) 이미지 너비
-    this.h = img[this.i].height; //(크기) 이미지 높이
+    this.w = img[this.i].width / 2; //(크기) 이미지 너비
+    this.h = img[this.i].height / 2; //(크기) 이미지 높이
   }
 
   draw() {
@@ -221,24 +221,24 @@ class Img {
     this.x += this.xSpeed;
     this.y += this.ySpeed;
 
-    if (this.x > width / 2 - img[this.i].width / 2) {
+    if (this.x > width - img[this.i].width) {
       ////////////////////// 수정. 원래 있던 코드 삭제하고 밑에 네 개 추가, 123~138
-      this.x = width / 2 - img[this.i].width / 2;
+      this.x = width - img[this.i].width;
       this.xSpeed = this.xSpeed * -1;
     }
-    if (this.x < -width / 2 + img[this.i].width / 2) {
+    if (this.x < -width + img[this.i].width) {
       //////////////////////
-      this.x = -width / 2 + img[this.i].width / 2;
+      this.x = -width + img[this.i].width;
       this.xSpeed = this.xSpeed * -1;
     }
-    if (this.y > height / 2 - img[this.i].height / 2) {
+    if (this.y > height - img[this.i].height) {
       ///////////////////////////
-      this.y = height / 2 - img[this.i].height / 2;
+      this.y = height - img[this.i].height;
       this.ySpeed = this.ySpeed * -1;
     }
-    if (this.y < -height / 2 + img[this.i].height / 2) {
+    if (this.y < -height + img[this.i].height) {
       ////////////////////////////
-      this.y = -height / 2 + img[this.i].height / 2;
+      this.y = -height + img[this.i].height;
       this.ySpeed = this.ySpeed * -1;
     }
   }
